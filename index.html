@@ -58,7 +58,6 @@
   }
   .btn:hover{ opacity:0.85; }
   .btn-outline{ background:transparent; color:var(--ink); border:1px solid var(--line-strong); }
-  .contact .btn-outline{ color:var(--bg); }
   .btn-outline:hover{ border-color:var(--ink); }
   @media (max-width:640px){ .nav-links a:not(.btn){ display:none; } }
 
@@ -124,12 +123,9 @@
   .price-list li{ padding:8px 0; border-top:1px solid var(--line); }
   .price-list li:first-child{ border-top:none; }
 
-  .contact{ background:var(--ink); color:var(--bg); padding:76px 0; }
-  .contact h2{ color:var(--bg); max-width:16ch; }
-  .contact .block-note{ color:#CBD1C6; }
+  .contact{ background:var(--surface); border-top:1px solid var(--line); padding:76px 0; }
+  .contact h2{ max-width:16ch; }
   .contact-cta{ margin-top:26px; display:flex; gap:14px; flex-wrap:wrap; }
-  .contact .btn-outline{ background:transparent; border-color:#3A443E; }
-  .contact .btn-outline:hover{ border-color:var(--bg); }
 
   footer{ padding:26px 0; font-size:13.5px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
   footer a{ text-decoration:none; color:inherit; }
@@ -305,6 +301,7 @@
 
 <section class="contact">
   <div class="wrap">
+    <div class="block-num">03</div>
     <h2>Опишите задачу – отвечу с планом и сроком</h2>
     <p class="block-note">Без брифов на десять страниц. Расскажите, что нужно бизнесу – предложу подходящий пакет или соберём условия под вашу задачу отдельно.</p>
     <div class="contact-cta">
