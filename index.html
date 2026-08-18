@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+  <html lang="ru">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Владислав — разработка мобильных приложений, ботов и веб-сервисов</title>
+  <meta name="description" content="Full Stack разработка для бизнеса: мобильные приложения, Telegram-боты, веб-сервисы. От идеи до рабочего MVP за 3–5 недель.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #EDEFE9;
+      --bg-2: #E2E6DD;
+      --surface: #FFFFFF;
+      --ink: #1A2321;
+    --ink-soft: #4A5652;
+    --line: #C4CBC2;
+          --line-strong: #9AA69E;
+    --rust: #C4501E;
+          --rust-deep: #9A3C15;
+    --pine: #1E5850;
+    --radius: 2px;
+    --wrap: 1120px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+        background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+}
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  :focus-visible{
+        outline:2px solid var(--rust);
+    outline-offset:3px;
+}
+
+  .wrap{
+        max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 32px;
+}
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+
+  header{
+        position:sticky; top:0; z-index:50;
+    background:rgba(237,239,233,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+}
+  .nav{
+        display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+}
+  .brand{
+        font-family:var(--font-display);
+    font-weight:600;
+    font-size:19px;
+    letter-spacing:-0.01em;
+}
+  .brand span{ color:var(--rust); }
+  .nav-links{
+        display:flex; align-items:center; gap:28px;
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:0.02em;
+}
+  .nav-links a{ text-decoration:none; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink);
+    color:var(--bg);
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:0.02em;
+    padding:11px 18px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    border:1px solid var(--ink);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover{ background:transparent; color:var(--ink); }
+  .btn-accent{
+        background:var(--rust);
+    border-color:var(--rust);
+    color:#fff;
+    }
+  .btn-accent:hover{ background:transparent; color:var(--rust); }
+  @media (max-width:720px){ .nav-links a:not(.btn){ display:none; } }
+
+  .hero{
+        padding:88px 0 64px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+        font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rust-deep);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+}
+  .eyebrow::before{
+        content:'';
+    width:22px; height:1px;
+    background:var(--rust);
+}
+  h1{
+        font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(34px, 5.4vw, 62px);
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    max-width:16ch;
+}
+  h1 em{
+        font-style:normal;
+    color:var(--rust);
+  }
+  .lede{
+        margin-top:24px;
+    max-width:52ch;
+    font-size:18px;
+    color:var(--ink-soft);
+}
+  .hero-cta{
+        margin-top:36px;
+    display:flex; gap:14px; flex-wrap:wrap;
+}
+
+  .ruler-block{
+        margin-top:72px;
+    padding-top:40px;
+    border-top:1px dashed var(--line-strong);
+}
+  .ruler-caption{
+        font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin-bottom:26px;
+    text-transform:uppercase;
+}
+  .ruler-row{
+        display:grid;
+    grid-template-columns:120px 1fr 90px;
+    align-items:center;
+    gap:18px;
+    margin-bottom:18px;
+}
+  .ruler-label{
+        font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--ink-soft);
+}
+  .ruler-track{
+        position:relative;
+    height:26px;
+}
+  .ruler-bar{
+        position:relative;
+    height:26px;
+    background:var(--surface);
+    border:1px solid var(--ink);
+    background-image:repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 16px);
+}
+  .ruler-bar.you{
+    border-color:var(--rust);
+    background-image:repeating-linear-gradient(90deg, var(--rust) 0 1px, transparent 1px 16px);
+  }
+  .ruler-value{
+        font-family:var(--font-mono);
+    font-size:13px;
+    font-weight:500;
+    text-align:right;
+}
+  .ruler-value.you{ color:var(--rust-deep); }
+  @media (max-width:560px){
+    .ruler-row{ grid-template-columns:80px 1fr 68px; gap:10px; }
+}
+
+  .strip{
+        border-bottom:1px solid var(--line);
+    padding:26px 0;
+    overflow-x:auto;
+}
+  .strip-row{
+        display:flex; gap:36px;
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+}
+  .strip-row b{ color:var(--ink); font-weight:500; }
+
+  section.block{ padding:88px 0; }
+  .block-head{
+        display:flex; justify-content:space-between; align-items:flex-end;
+    gap:20px; flex-wrap:wrap;
+    margin-bottom:48px;
+}
+  .block-num{
+        font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--rust-deep);
+    letter-spacing:0.05em;
+}
+  h2{
+        font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(26px, 3.4vw, 38px);
+    letter-spacing:-0.01em;
+    margin-top:8px;
+}
+  .block-note{
+        max-width:36ch;
+    font-size:14px;
+    color:var(--ink-soft);
+    text-align:right;
+}
+  @media (max-width:640px){ .block-note{ text-align:left; } }
+
+  .cases{
+        display:grid;
+    gap:28px;
+}
+  .case-card{
+        background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    overflow:hidden;
+    opacity:0; transform:translateY(14px);
+    transition:opacity 0.5s ease, transform 0.5s ease;
+}
+  .case-card.visible{ opacity:1; transform:none; }
+  .case-card.no-media{ grid-template-columns:1fr; }
+  @media (max-width:820px){
+    .case-card{ grid-template-columns:1fr; }
+}
+  .case-media{
+        background:var(--bg-2);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background-color:var(--line);
+}
+  .case-media img{ width:100%; height:100%; object-fit:cover; min-height:180px; }
+  .case-body{ padding:36px; }
+  .case-tag{
+        font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:var(--pine);
+    text-transform:uppercase;
+    border:1px solid var(--pine);
+    display:inline-block;
+    padding:4px 9px;
+    border-radius:2px;
+    margin-bottom:16px;
+}
+  .case-title{
+        font-family:var(--font-display);
+    font-weight:600;
+    font-size:22px;
+    margin-bottom:16px;
+}
+  .case-title a{ text-decoration:none; }
+  .case-title a:hover{ color:var(--rust); }
+  .case-row{ margin-bottom:12px; }
+  .case-row .k{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:4px;
+  }
+  .case-row .v{ font-size:14.5px; }
+  .case-stats{
+        margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    display:flex; gap:26px; flex-wrap:wrap;
+}
+  .stat b{
+        display:block;
+    font-family:var(--font-display);
+    font-size:22px;
+    color:var(--rust-deep);
+  }
+  .stat span{
+        font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .case-note{
+        margin-top:16px;
+    font-size:12.5px;
+    font-style:italic;
+    color:var(--ink-soft);
+}
+
+  .pricing-grid{
+        display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+}
+  @media (max-width:900px){ .pricing-grid{ grid-template-columns:1fr; } }
+  .price-card{
+        background:var(--surface);
+    padding:34px 30px;
+    display:flex; flex-direction:column;
+}
+  .price-name{
+        font-family:var(--font-display);
+    font-weight:600;
+    font-size:19px;
+    margin-bottom:6px;
+}
+  .price-for{
+        font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+    min-height:40px;
+}
+  .price-tag{
+        font-family:var(--font-mono);
+    font-size:24px;
+    font-weight:500;
+    color:var(--rust-deep);
+    margin-bottom:4px;
+}
+  .price-time{
+        font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+}
+  .price-list{
+        list-style:none;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    flex:1;
+}
+  .price-list li{
+        padding:9px 0;
+    border-top:1px solid var(--line);
+}
+  .price-list li:first-child{ border-top:none; }
+
+      .contact{
+    background:var(--ink);
+    color:var(--bg);
+    padding:96px 0;
+  }
+  .contact h2{ color:var(--bg); }
+  .contact .eyebrow{ color:#E3A17F; }
+    .contact .eyebrow::before{ background:#E3A17F; }
+    .contact-lede{
+          max-width:48ch;
+    color:#C7CDC9;
+        font-size:17px;
+    margin-top:20px;
+                             }
+  .contact-cta{
+        margin-top:36px;
+    display:flex; gap:14px; flex-wrap:wrap;
+                   }
+  .contact .btn{
+    background:var(--bg);
+    color:var(--ink);
+    border-color:var(--bg);
+  }
+  .contact .btn:hover{ background:transparent; color:var(--bg); }
+  .contact .btn-accent{
+        background:var(--rust);
+    border-color:var(--rust);
+    color:#fff;
+    }
+  .contact .btn-accent:hover{ background:transparent; color:var(--rust); }
+
+  footer{
+        padding:28px 0;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
+</style>
+  </head>
+  <body>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Владислав <span>/</span> dev</div>
+      <nav class="nav-links">
+        <a href="#cases">Кейсы</a>
+        <a href="#pricing">Цены</a>
+        <a href="https://t.me/NeroShoting" class="btn">Написать в Telegram</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Full stack разработка для бизнеса</div>
+        <h1>От идеи до рабочего <em>MVP</em> — за 3–5 недель</h1>
+        <p class="lede">Мобильные приложения, Telegram-боты и мини-приложения, веб-сервисы. Полноценный продукт с бэкендом и админкой — не шаблон и не конструктор.</p>
+        <div class="hero-cta">
+          <a href="https://t.me/NeroShoting" class="btn btn-accent">Обсудить проект</a>
+          <a href="#cases" class="btn" style="background:transparent;color:var(--ink);">Смотреть кейсы</a>
+        </div>
+
+        <div class="ruler-block">
+          <div class="ruler-caption">Срок разработки MVP — агентство vs я</div>
+          <div class="ruler-row">
+            <span class="ruler-label">Агентство</span>
+            <div class="ruler-track"><div class="ruler-bar" style="width:100%;"></div></div>
+            <span class="ruler-value">2–3 мес.</span>
+          </div>
+          <div class="ruler-row">
+            <span class="ruler-label">Я</span>
+            <div class="ruler-track"><div class="ruler-bar you" style="width:38%;"></div></div>
+            <span class="ruler-value you">3–5 нед.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip">
+      <div class="wrap strip-row">
+        <span><b>Mobile</b> Kotlin, Dart / Flutter</span>
+        <span><b>Backend</b> Python, FastAPI, Django, Go</span>
+        <span><b>Frontend</b> HTML, CSS, JS, Vue 3</span>
+        <span><b>Telegram</b> Боты, Mini Apps</span>
+        <span><b>DevOps</b> Docker, CI/CD</span>
+      </div>
+    </div>
+
+    <section class="block" id="cases">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="block-num">01 · Портфолио</div>
+            <h2>Что уже построено</h2>
+          </div>
+          <p class="block-note">Реальные проекты — не тестовые задания. Код и цифры проверяемы.</p>
+        </div>
+
+        <div class="cases">
+
+          <article class="case-card">
+            <div class="case-media">
+              <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/shop-webapp.png" alt="Скриншот Telegram Mini App магазина" loading="lazy">
+              <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/dashboard.png" alt="Скриншот админ-панели с аналитикой" loading="lazy">
+            </div>
+            <div class="case-body">
+              <span class="case-tag">Telegram · Mini Apps</span>
+            <h3 class="case-title"><a href="https://github.com/kitron4ik/ProjectsPortfolio" target="_blank" rel="noopener">Экосистема мини-приложений →</a></h3>
+              <div class="case-row"><span class="k">Что это</span><span class="v">5 Telegram Mini Apps под разные бизнес-сценарии: онлайн-запись, магазин с корзиной, квиз для сбора лидов, AI-чат, админ-панель с графиками.</span></div>
+              <div class="case-row"><span class="k">Стек</span><span class="v">Python, Aiogram 3, FastAPI, SQLite, Docker</span></div>
+            </div>
+          </article>
+
+          <article class="case-card no-media">
+            <div class="case-body">
+              <span class="case-tag">Mobile · Flutter</span>
+              <h3 class="case-title"><a href="https://gitlab.com/kitron4ik/krimaigid" target="_blank" rel="noopener">Крымские Тропы →</a></h3>
+              <div class="case-row"><span class="k">Задача</span><span class="v">Турист тонет в информации о Крыме — десятки вкладок и ноль готового плана.</span></div>
+              <div class="case-row"><span class="k">Решение</span><span class="v">Приложение само собирает маршрут по городу и датам: карта, места, время визита. Живая навигация, гибкие фильтры.</span></div>
+              <div class="case-stats">
+                <div class="stat"><b>500+</b><span>мест</span></div>
+                <div class="stat"><b>20+</b><span>городов Крыма</span></div>
+                <div class="stat"><b>RuStore</b><span>публикация</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-card no-media">
+            <div class="case-body">
+              <span class="case-tag">Mobile · Kotlin · AI</span>
+            <h3 class="case-title">EasyFood</h3>
+            <div class="case-row"><span class="k">Задача</span><span class="v">Подсчёт КБЖУ вручную — рутина, которую бросают через неделю.</span></div>
+              <div class="case-row"><span class="k">Решение</span><span class="v">Распознавание еды по фото через GPT-4 Vision, сканер штрихкодов, персональные нормы, генерация рецептов из доступных продуктов.</span></div>
+              <div class="case-stats">
+                <div class="stat"><b>500K+</b><span>продуктов в базе</span></div>
+                <div class="stat"><b>401</b><span>коммит</span></div>
+                <div class="stat"><b>Freemium</b><span>модель</span></div>
+              </div>
+              <p class="case-note">Закрытый репозиторий — код доступен по запросу.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="pricing" style="border-top:1px solid var(--line);">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="block-num">02 · Стоимость</div>
+            <h2>Пакеты MVP</h2>
+          </div>
+          <p class="block-note">Фиксированная вилка, не почасовая ставка. Полноценный бэкенд и админка — не конструктор.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-name">Запись и клиентская база</div>
+            <div class="price-for">Барбершопы, клиники, автосервисы, репетиторы</div>
+            <div class="price-tag">180 000–260 000 ₽</div>
+            <div class="price-time">3–4 недели</div>
+            <ul class="price-list">
+              <li>Клиентское приложение с онлайн-записью</li>
+              <li>Админ-панель для бизнеса</li>
+              <li>Push-напоминания</li>
+              <li>Онлайн-предоплата (ЮKassa / Т-Касса)</li>
+            </ul>
+          </div>
+          <div class="price-card">
+            <div class="price-name">Каталог и заказы</div>
+            <div class="price-for">Малый retail, доставка еды, интернет-магазин</div>
+            <div class="price-tag">220 000–320 000 ₽</div>
+            <div class="price-time">4–5 недель</div>
+            <ul class="price-list">
+              <li>Каталог, корзина, оформление заказа</li>
+              <li>Трекинг статуса в реальном времени</li>
+              <li>Push без звонков менеджера</li>
+              <li>Админка для заказов</li>
+            </ul>
+          </div>
+          <div class="price-card">
+            <div class="price-name">Лояльность и вовлечённость</div>
+            <div class="price-for">Сети кафе, ритейл, бьюти-салоны</div>
+            <div class="price-tag">200 000–300 000 ₽</div>
+            <div class="price-time">3–4 недели</div>
+            <ul class="price-list">
+              <li>QR / штрихкод-карта лояльности</li>
+              <li>Баллы и кэшбэк</li>
+              <li>Личный кабинет с историей покупок</li>
+              <li>+ доплата за интеграцию с кассой</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="contact">
+    <div class="wrap">
+      <div class="eyebrow">Готовы обсудить</div>
+      <h2>Опишите задачу — отвечу с планом и сроком</h2>
+      <p class="contact-lede">Без брифов на десять страниц. Расскажите, что нужно бизнесу — предложу подходящий пакет или соберём условия под вашу задачу отдельно.</p>
+      <div class="contact-cta">
+        <a href="https://t.me/NeroShoting" class="btn btn-accent">Telegram — @NeroShoting</a>
+        <a href="mailto:craftukww@gmail.com" class="btn">craftukww@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
+      <span>© 2026 Владислав</span>
+      <span><a href="https://github.com/kitron4ik" target="_blank" rel="noopener" style="text-decoration:none;">github.com/kitron4ik</a></span>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cards = document.querySelectorAll('.case-card');
+    if(reduced || !('IntersectionObserver' in window)){
+      cards.forEach(function(c){ c.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+                if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+                }
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(function(c){ io.observe(c); });
+})();
+</script>
+
+  </body>
+  </html>
+  
