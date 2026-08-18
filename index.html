@@ -44,7 +44,7 @@
   .bento{
     max-width:1400px; margin:0 auto; padding:8px 24px 60px;
     display:grid; grid-template-columns:repeat(6, 1fr);
-    grid-auto-flow:dense; gap:14px;
+    gap:14px;
   }
   .tile{
     border-radius:22px; border:1px solid var(--line); padding:30px;
@@ -73,10 +73,6 @@
   .t-stack{ display:flex; flex-direction:column; justify-content:center; }
   .t-stack .lbl{ font-size:12.5px; font-weight:700; color:var(--pine); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; }
   .t-stack .items{ font-size:14.5px; color:var(--ink-soft); line-height:1.9; }
-
-  .t-fact{ background:var(--pine-deep); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
-  .t-fact b{ font-family:var(--font-display); font-size:30px; font-weight:700; color:var(--ink); }
-  .t-fact span{ margin-top:6px; font-size:13px; color:#CFE6DF; }
 
   .tag{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; padding:5px 11px; border-radius:99px; display:inline-block; margin-bottom:14px; }
   .tag.g{ background:rgba(232,178,61,0.16); color:var(--gold); }
@@ -111,8 +107,6 @@
   .t-contact .btn{ background:#181008; color:var(--gold); border-color:#181008; }
   .t-contact .btn-outline{ background:transparent; color:#181008; border:1px solid rgba(24,16,8,0.35); }
 
-  .t-deco{ display:flex; align-items:center; justify-content:center; background:var(--surface-2); }
-
   footer{ max-width:1400px; margin:0 auto; padding:0 24px 32px; font-size:13px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
   footer a{ text-decoration:none; color:inherit; }
   footer a:hover{ color:var(--ink); }
@@ -143,16 +137,6 @@
     <span class="vs">агентство: 2–3 месяца</span>
   </div>
 
-  <div class="tile t-stack c2">
-    <div class="lbl">Стек</div>
-    <div class="items">Kotlin · Dart / Flutter<br>Python · FastAPI · Django · Go<br>Vue 3 · Docker</div>
-  </div>
-
-  <div class="tile t-fact c2">
-    <b>3</b>
-    <span>реальных проекта в портфолио, не тесты</span>
-  </div>
-
   <div class="tile c4">
     <span class="tag g">Telegram · Mini Apps</span>
     <div class="t-media">
@@ -162,6 +146,11 @@
     </div>
     <div class="work-title"><a href="https://github.com/kitron4ik/ProjectsPortfolio" target="_blank" rel="noopener">Экосистема мини-приложений →</a></div>
     <p class="work-desc">5 Telegram Mini Apps под разные бизнес-сценарии: онлайн-запись, магазин с корзиной, квиз для сбора лидов, AI-чат, админ-панель с графиками. <b>Стек:</b> Python, Aiogram 3, FastAPI, SQLite, Docker.</p>
+  </div>
+
+  <div class="tile t-stack c2">
+    <div class="lbl">Стек</div>
+    <div class="items">Kotlin · Dart / Flutter<br>Python · FastAPI · Django · Go<br>Vue 3 · Docker</div>
   </div>
 
   <div class="tile c3">
