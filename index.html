@@ -7,131 +7,129 @@
 <meta name="description" content="Full Stack разработка для бизнеса: мобильные приложения, Telegram-боты, веб-сервисы. От идеи до рабочего MVP за 3–5 недель.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #FBFAF8;
+    --bg: #EDEFE9;
     --surface: #FFFFFF;
-    --ink: #16140F;
-    --ink-soft: #66614F;
-    --line: #E5E1D6;
-    --accent: #1F5C4E;
-    --accent-tint: #E8EFEC;
-    --wrap: 880px;
-    --font: 'Manrope', sans-serif;
+    --ink: #1A2321;
+    --ink-soft: #5C665F;
+    --line: #D9DED4;
+    --line-strong: #B7C0B5;
+    --rust: #C4501E;
+    --rust-deep: #9A3C15;
+    --rust-tint: #F3DFD1;
+    --pine: #1E5850;
+    --pine-tint: #DCE8E4;
+    --radius: 10px;
+    --wrap: 920px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--font);
-    font-size:17px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    background:var(--bg); color:var(--ink); font-family:var(--font-body);
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
   }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
   a{ color:inherit; }
-  img{ max-width:100%; display:block; }
-  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
-
+  img,svg.media-svg{ max-width:100%; display:block; }
+  :focus-visible{ outline:2px solid var(--rust); outline-offset:3px; }
   .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 24px; }
 
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(251,250,248,0.9);
-    backdrop-filter:blur(6px);
+    background:rgba(237,239,233,0.92); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
-  .brand{ font-weight:800; font-size:18px; letter-spacing:-0.01em; }
-  .nav-links{ display:flex; align-items:center; gap:28px; font-size:15px; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; height:74px; }
+  .brand{ font-family:var(--font-display); font-weight:600; font-size:18px; }
+  .brand span{ color:var(--rust); }
+  .nav-links{ display:flex; align-items:center; gap:26px; font-size:15px; }
   .nav-links a{ text-decoration:none; color:var(--ink-soft); }
   .nav-links a:hover{ color:var(--ink); }
   .btn{
     display:inline-flex; align-items:center; gap:8px;
-    background:var(--accent); color:#fff;
-    font-family:var(--font); font-weight:600; font-size:15px;
-    padding:11px 20px; border-radius:8px;
-    text-decoration:none; border:1px solid var(--accent);
+    background:var(--rust); color:#fff; font-weight:600; font-size:15px;
+    padding:11px 20px; border-radius:8px; text-decoration:none; border:1px solid var(--rust);
     transition:opacity 0.15s ease;
   }
   .btn:hover{ opacity:0.85; }
-  .btn-outline{
-    background:transparent; color:var(--ink); border:1px solid var(--line);
-  }
+  .btn-outline{ background:transparent; color:var(--ink); border:1px solid var(--line-strong); }
   .btn-outline:hover{ border-color:var(--ink); }
   @media (max-width:640px){ .nav-links a:not(.btn){ display:none; } }
 
-  .hero{ padding:88px 0 64px; }
-  .eyebrow{
-    font-size:14px; font-weight:600; color:var(--accent);
-    margin-bottom:20px;
-  }
+  .hero{ padding:80px 0 0; }
+  .eyebrow{ font-size:14px; font-weight:600; color:var(--rust-deep); margin-bottom:20px; }
   h1{
-    font-size:clamp(36px, 6vw, 58px);
-    font-weight:800;
-    line-height:1.08;
-    letter-spacing:-0.02em;
-    max-width:15ch;
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(34px, 5.6vw, 56px); line-height:1.1; letter-spacing:-0.01em; max-width:15ch;
   }
   .lede{ margin-top:22px; max-width:52ch; font-size:19px; color:var(--ink-soft); }
-  .hero-cta{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-  .hero-cta .link{ font-weight:600; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .hero-cta{ margin-top:30px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .hero-cta .link{ font-weight:600; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--line-strong); padding-bottom:2px; }
   .hero-cta .link:hover{ border-color:var(--ink); }
 
-  .compare{
-    margin-top:64px; padding-top:40px; border-top:1px solid var(--line);
-    display:flex; gap:56px; flex-wrap:wrap;
-  }
-  .compare-item .num{ font-size:34px; font-weight:800; line-height:1; }
-  .compare-item .lbl{ margin-top:8px; font-size:14px; color:var(--ink-soft); }
-  .compare-item.you .num{ color:var(--accent); }
+  .ruler-block{ margin-top:60px; padding:32px 0 40px; border-top:1px dashed var(--line-strong); }
+  .ruler-caption{ font-size:13px; font-weight:600; color:var(--ink-soft); margin-bottom:22px; text-transform:uppercase; letter-spacing:0.04em; }
+  .ruler-row{ display:grid; grid-template-columns:130px 1fr 90px; align-items:center; gap:16px; margin-bottom:16px; }
+  .ruler-label{ font-size:14px; color:var(--ink-soft); font-weight:500; }
+  .ruler-bar{ height:24px; background:var(--surface); border:1px solid var(--ink); border-radius:5px;
+    background-image:repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 16px); }
+  .ruler-bar.you{ border-color:var(--rust); background-image:repeating-linear-gradient(90deg, var(--rust) 0 1px, transparent 1px 16px); }
+  .ruler-value{ font-weight:700; font-size:15px; text-align:right; }
+  .ruler-value.you{ color:var(--rust-deep); }
+  @media (max-width:560px){ .ruler-row{ grid-template-columns:88px 1fr 70px; gap:10px; } }
 
-  .stack{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:20px 0; font-size:14px; color:var(--ink-soft);
-  }
+  .stack{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 0; font-size:14px; color:var(--ink-soft); overflow-x:auto; white-space:nowrap; }
 
-  section.block{ padding:80px 0; }
+  section.block{ padding:76px 0; }
   .block-head{ margin-bottom:44px; }
-  .block-num{ font-size:14px; font-weight:600; color:var(--accent); margin-bottom:10px; }
-  h2{ font-size:clamp(26px, 3.6vw, 36px); font-weight:800; letter-spacing:-0.01em; }
+  .block-num{ font-size:14px; font-weight:600; color:var(--rust-deep); margin-bottom:10px; }
+  h2{ font-family:var(--font-display); font-weight:600; font-size:clamp(25px, 3.4vw, 34px); letter-spacing:-0.01em; }
   .block-note{ margin-top:12px; font-size:16px; color:var(--ink-soft); max-width:52ch; }
 
-  .work-item{ padding:40px 0; border-top:1px solid var(--line); }
+  .work-item{ padding:44px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:220px 1fr; gap:32px; }
   .work-item:first-child{ border-top:none; }
-  .work-top{ display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
-  .work-title{ font-size:23px; font-weight:800; letter-spacing:-0.01em; }
-  .work-title a{ text-decoration:none; }
-  .work-title a:hover{ color:var(--accent); }
-  .work-tag{ font-size:13px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em; }
-  .work-desc{ font-size:16px; color:var(--ink-soft); max-width:64ch; margin-bottom:10px; }
-  .work-desc b{ color:var(--ink); font-weight:700; }
-  .work-stats{ font-size:15px; color:var(--ink-soft); margin-top:14px; }
-  .work-stats b{ color:var(--accent); font-weight:800; }
+  @media (max-width:720px){ .work-item{ grid-template-columns:1fr; } }
   .work-media{
-    margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:420px;
+    border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+    background:var(--surface); aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
   }
-  .work-media img{ border-radius:10px; border:1px solid var(--line); width:100%; height:auto; }
-  .work-note{ margin-top:10px; font-size:14px; color:var(--ink-soft); font-style:italic; }
+  .work-media.split{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:1px; background:var(--line); aspect-ratio:1/1; }
+  .work-media.split img{ width:100%; height:100%; object-fit:cover; }
+  .work-media.split img:first-child{ grid-column:1 / span 2; }
+  .work-top{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:12px; }
+  .work-title{ font-family:var(--font-display); font-size:22px; font-weight:600; }
+  .work-title a{ text-decoration:none; }
+  .work-title a:hover{ color:var(--rust); }
+  .work-tag{ font-size:12.5px; font-weight:600; color:var(--pine); text-transform:uppercase; letter-spacing:0.04em; }
+  .work-desc{ font-size:15.5px; color:var(--ink-soft); max-width:64ch; margin-bottom:8px; }
+  .work-desc b{ color:var(--ink); font-weight:700; }
+  .work-stats{ font-size:15px; color:var(--ink-soft); margin-top:12px; }
+  .work-stats b{ color:var(--rust-deep); font-weight:800; }
+  .work-note{ margin-top:10px; font-size:13.5px; color:var(--ink-soft); font-style:italic; }
 
-  .pricing-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .pricing-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
   @media (max-width:820px){ .pricing-grid{ grid-template-columns:1fr; } }
-  .price-card{ background:var(--surface); padding:28px 24px; display:flex; flex-direction:column; }
-  .price-name{ font-size:18px; font-weight:800; margin-bottom:6px; }
-  .price-for{ font-size:14px; color:var(--ink-soft); margin-bottom:20px; min-height:38px; }
-  .price-tag{ font-size:23px; font-weight:800; color:var(--accent); margin-bottom:2px; }
-  .price-time{ font-size:14px; color:var(--ink-soft); margin-bottom:20px; }
-  .price-list{ list-style:none; font-size:14.5px; color:var(--ink-soft); flex:1; }
-  .price-list li{ padding:9px 0; border-top:1px solid var(--line); }
+  .price-card{ background:var(--surface); padding:26px 22px; display:flex; flex-direction:column; }
+  .price-name{ font-family:var(--font-display); font-size:18px; font-weight:600; margin-bottom:6px; }
+  .price-for{ font-size:13.5px; color:var(--ink-soft); margin-bottom:18px; min-height:36px; }
+  .price-tag{ font-size:22px; font-weight:700; color:var(--rust-deep); margin-bottom:2px; }
+  .price-time{ font-size:13px; color:var(--ink-soft); margin-bottom:18px; }
+  .price-list{ list-style:none; font-size:14px; color:var(--ink-soft); flex:1; }
+  .price-list li{ padding:8px 0; border-top:1px solid var(--line); }
   .price-list li:first-child{ border-top:none; }
 
-  .contact{ background:var(--accent-tint); border-top:1px solid var(--line); padding:80px 0; }
-  .contact h2{ max-width:16ch; }
-  .contact-cta{ margin-top:28px; display:flex; gap:14px; flex-wrap:wrap; }
+  .contact{ background:var(--ink); color:var(--bg); padding:76px 0; }
+  .contact h2{ color:var(--bg); max-width:16ch; }
+  .contact .block-note{ color:#C7CDC4; }
+  .contact-cta{ margin-top:26px; display:flex; gap:14px; flex-wrap:wrap; }
+  .contact .btn-outline{ background:transparent; color:var(--bg); border-color:#3A443E; }
+  .contact .btn-outline:hover{ border-color:var(--bg); }
 
-  footer{ padding:28px 0; font-size:14px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  footer{ padding:26px 0; font-size:13.5px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
   footer a{ text-decoration:none; color:inherit; }
   footer a:hover{ color:var(--ink); }
 </style>
@@ -140,7 +138,7 @@
 
 <header>
   <div class="wrap nav">
-    <div class="brand">Владислав</div>
+    <div class="brand">Владислав <span>/</span> dev</div>
     <nav class="nav-links">
       <a href="#work">Кейсы</a>
       <a href="#pricing">Цены</a>
@@ -161,14 +159,17 @@
         <a href="#work" class="link">Смотреть кейсы →</a>
       </div>
 
-      <div class="compare">
-        <div class="compare-item">
-          <div class="num">2–3 мес.</div>
-          <div class="lbl">типичное агентство</div>
+      <div class="ruler-block">
+        <div class="ruler-caption">Срок разработки MVP</div>
+        <div class="ruler-row">
+          <span class="ruler-label">Агентство</span>
+          <div class="ruler-bar" style="width:100%;"></div>
+          <span class="ruler-value">2–3 мес.</span>
         </div>
-        <div class="compare-item you">
-          <div class="num">3–5 нед.</div>
-          <div class="lbl">я</div>
+        <div class="ruler-row">
+          <span class="ruler-label">Я</span>
+          <div class="ruler-bar you" style="width:38%;"></div>
+          <span class="ruler-value you">3–5 нед.</span>
         </div>
       </div>
     </div>
@@ -187,34 +188,63 @@
       </div>
 
       <div class="work-item">
-        <div class="work-top">
-          <div class="work-title"><a href="https://github.com/kitron4ik/ProjectsPortfolio" target="_blank" rel="noopener">Экосистема мини-приложений</a></div>
-          <div class="work-tag">Telegram · Mini Apps</div>
-        </div>
-        <p class="work-desc">5 Telegram Mini Apps под разные бизнес-сценарии: онлайн-запись, магазин с корзиной, квиз для сбора лидов, AI-чат, админ-панель с графиками. <b>Стек:</b> Python, Aiogram 3, FastAPI, SQLite, Docker.</p>
-        <div class="work-media">
-          <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/shop-webapp.png" alt="Скриншот Telegram Mini App магазина" loading="lazy">
+        <div class="work-media split">
           <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/dashboard.png" alt="Скриншот админ-панели с аналитикой" loading="lazy">
+          <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/shop-webapp.png" alt="Скриншот Telegram Mini App магазина" loading="lazy">
+          <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/bot-menu.png" alt="Скриншот меню Telegram-бота" loading="lazy">
+        </div>
+        <div>
+          <div class="work-top">
+            <div class="work-title"><a href="https://github.com/kitron4ik/ProjectsPortfolio" target="_blank" rel="noopener">Экосистема мини-приложений</a></div>
+            <div class="work-tag">Telegram · Mini Apps</div>
+          </div>
+          <p class="work-desc">5 Telegram Mini Apps под разные бизнес-сценарии: онлайн-запись, магазин с корзиной, квиз для сбора лидов, AI-чат, админ-панель с графиками. <b>Стек:</b> Python, Aiogram 3, FastAPI, SQLite, Docker.</p>
         </div>
       </div>
 
       <div class="work-item">
-        <div class="work-top">
-          <div class="work-title"><a href="https://gitlab.com/kitron4ik/krimaigid" target="_blank" rel="noopener">Крымские Тропы</a></div>
-          <div class="work-tag">Mobile · Flutter</div>
+        <div class="work-media">
+          <svg class="media-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="var(--pine-tint)"/>
+            <polygon points="0,220 70,120 130,190 190,90 300,220 300,300 0,300" fill="var(--pine)" opacity="0.18"/>
+            <path d="M30 240 Q 90 150 150 190 T 270 90" fill="none" stroke="var(--pine)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+            <circle cx="30" cy="240" r="7" fill="var(--rust)"/>
+            <circle cx="150" cy="190" r="6" fill="var(--surface)" stroke="var(--pine)" stroke-width="3"/>
+            <circle cx="270" cy="90" r="6" fill="var(--surface)" stroke="var(--pine)" stroke-width="3"/>
+          </svg>
         </div>
-        <p class="work-desc"><b>Задача:</b> турист тонет в информации о Крыме – десятки вкладок и ноль готового плана. <b>Решение:</b> приложение само собирает маршрут по городу и датам: карта, места, время визита. Живая навигация, гибкие фильтры.</p>
-        <p class="work-stats"><b>500+</b> мест · <b>20+</b> городов Крыма · опубликовано на RuStore</p>
+        <div>
+          <div class="work-top">
+            <div class="work-title"><a href="https://gitlab.com/kitron4ik/krimaigid" target="_blank" rel="noopener">Крымские Тропы</a></div>
+            <div class="work-tag">Mobile · Flutter</div>
+          </div>
+          <p class="work-desc"><b>Задача:</b> турист тонет в информации о Крыме – десятки вкладок и ноль готового плана. <b>Решение:</b> приложение само собирает маршрут по городу и датам: карта, места, время визита. Живая навигация, гибкие фильтры.</p>
+          <p class="work-stats"><b>500+</b> мест · <b>20+</b> городов Крыма · опубликовано на RuStore</p>
+        </div>
       </div>
 
       <div class="work-item">
-        <div class="work-top">
-          <div class="work-title">EasyFood</div>
-          <div class="work-tag">Mobile · Kotlin · AI</div>
+        <div class="work-media">
+          <svg class="media-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="var(--rust-tint)"/>
+            <circle cx="150" cy="150" r="78" fill="var(--surface)" stroke="var(--pine)" stroke-width="3"/>
+            <path d="M150 150 L150 72 A78 78 0 0 1 217 189 Z" fill="var(--rust)" opacity="0.55"/>
+            <path d="M150 150 L217 189 A78 78 0 0 1 96 210 Z" fill="var(--pine)" opacity="0.35"/>
+            <path d="M40 40 L40 70 M40 40 L70 40" stroke="var(--rust-deep)" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M260 40 L260 70 M260 40 L230 40" stroke="var(--rust-deep)" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M40 260 L40 230 M40 260 L70 260" stroke="var(--rust-deep)" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M260 260 L260 230 M260 260 L230 260" stroke="var(--rust-deep)" stroke-width="4" stroke-linecap="round" fill="none"/>
+          </svg>
         </div>
-        <p class="work-desc"><b>Задача:</b> подсчёт КБЖУ вручную – рутина, которую бросают через неделю. <b>Решение:</b> распознавание еды по фото через GPT-4 Vision, сканер штрихкодов, персональные нормы, генерация рецептов из доступных продуктов.</p>
-        <p class="work-stats"><b>500K+</b> продуктов в базе · 401 коммит · freemium-модель</p>
-        <p class="work-note">Закрытый репозиторий – код доступен по запросу</p>
+        <div>
+          <div class="work-top">
+            <div class="work-title">EasyFood</div>
+            <div class="work-tag">Mobile · Kotlin · AI</div>
+          </div>
+          <p class="work-desc"><b>Задача:</b> подсчёт КБЖУ вручную – рутина, которую бросают через неделю. <b>Решение:</b> распознавание еды по фото через GPT-4 Vision, сканер штрихкодов, персональные нормы, генерация рецептов из доступных продуктов.</p>
+          <p class="work-stats"><b>500K+</b> продуктов в базе · 401 коммит · freemium-модель</p>
+          <p class="work-note">Закрытый репозиторий – код доступен по запросу</p>
+        </div>
       </div>
 
     </div>
