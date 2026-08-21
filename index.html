@@ -3,370 +3,489 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Владислав – мобильные приложения, боты и веб-сервисы для бизнеса</title>
-<meta name="description" content="Full Stack разработка для бизнеса: мобильные приложения, Telegram-боты, веб-сервисы. От идеи до рабочего MVP за 3–5 недель.">
+<title>Владислав — Full-Stack Developer: мобильные приложения, сайты, боты, Mini Apps</title>
+<meta name="description" content="Full-stack разработчик. Мобильные приложения, сайты, Telegram-боты и Mini Apps с полноценным бэкендом. Два завершённых мобильных приложения, одно опубликовано в RuStore.">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #0B0D12;
-    --bg-2: #14171F;
-    --surface: #171A22;
-    --ink: #F2F1ED;
-    --ink-soft: #9A9CA8;
-    --ink-dim: #6B6E7A;
-    --line: #262A34;
-
-    --rust: #E8703A;
-    --rust-deep: #C4501E;
-    --rust-soft: rgba(232,112,58,0.14);
-    --gold: #E8B23D;
-
-    --radius: 20px;
-    --wrap: 1180px;
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-  }
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--bg); color:var(--ink); font-family:var(--font-body);
-    font-size:16.5px; line-height:1.6; -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
-  a{ color:inherit; }
-  img{ max-width:100%; display:block; }
-  :focus-visible{ outline:2px solid var(--rust); outline-offset:3px; }
-  .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 28px; }
-
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(11,13,18,0.85); backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; }
-  .brand{ font-family:var(--font-display); font-weight:600; font-size:18px; }
-  .nav-links{ display:flex; align-items:center; gap:30px; font-size:15px; }
-  .nav-links a{ text-decoration:none; color:var(--ink-soft); }
-  .nav-links a:hover{ color:var(--ink); }
-  .nav-links a.btn, .nav-links a.btn:hover{ color:#fff; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--rust); color:#fff; font-weight:600; font-size:15px;
-    padding:13px 22px; border-radius:12px; text-decoration:none; border:1px solid var(--rust);
-    transition:opacity 0.15s ease;
-  }
-  .btn:hover{ opacity:0.88; }
-  .btn-outline{ background:transparent; color:var(--ink); border:1px solid var(--line); }
-  .btn-outline:hover{ border-color:var(--ink-dim); }
-
-  .pill{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--rust-soft); color:var(--rust); font-size:13px; font-weight:600;
-    padding:8px 16px; border-radius:99px; margin-bottom:24px;
-  }
-  .pill .dot{ width:6px; height:6px; border-radius:50%; background:var(--rust); }
-
-  /* ---------- hero ---------- */
-  .hero{ padding:72px 0 100px; position:relative; overflow:hidden; }
-  .hero::before{
-    content:''; position:absolute; top:-10%; right:-10%; width:60%; height:80%;
-    background:radial-gradient(circle, rgba(232,112,58,0.18) 0%, transparent 70%);
-    pointer-events:none;
-  }
-  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
-  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
-  h1{ font-family:var(--font-display); font-weight:700; font-size:clamp(36px, 4.6vw, 54px); line-height:1.08; letter-spacing:-0.02em; }
-  h1 .accent{ color:var(--rust); display:block; }
-  .lede{ margin-top:22px; font-size:17px; color:var(--ink-soft); max-width:46ch; }
-  .hero-cta{ margin-top:32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-  .hero-badge{
-    display:flex; flex-direction:column; gap:2px;
-    border:1px solid var(--line); border-radius:12px; padding:10px 18px;
-    font-size:12.5px; color:var(--ink-soft);
-  }
-  .hero-badge b{ font-family:var(--font-display); color:var(--ink); font-size:15px; font-weight:600; }
-  .trust-row{ margin-top:34px; display:flex; flex-wrap:wrap; gap:22px 30px; }
-  .trust-item{ display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--ink-soft); }
-  .trust-item svg{ flex:none; }
-
-  /* ---------- device mockup ---------- */
-  .device{ position:relative; }
-  .device-frame{
-    border:1px solid var(--line); border-radius:16px; background:var(--surface);
-    padding:10px; box-shadow:0 30px 70px -25px rgba(0,0,0,0.6);
-  }
-  .device-screen{ border-radius:9px; overflow:hidden; aspect-ratio:16/11; background:var(--bg-2); }
-  .device-screen img{ width:100%; height:100%; object-fit:cover; object-position:top; }
-  .device-base{ height:14px; background:var(--surface); border:1px solid var(--line); border-top:none; border-radius:0 0 10px 10px; margin:0 30px; }
-  .float-badge{
-    position:absolute; display:flex; align-items:center; gap:8px;
-    background:var(--surface); border:1px solid var(--line); border-radius:12px;
-    padding:9px 14px; font-size:13px; font-weight:600; box-shadow:0 12px 30px -12px rgba(0,0,0,0.5);
-  }
-  .float-badge .sw{ width:9px; height:9px; border-radius:3px; }
-  .fb-1{ top:-6%; left:-8%; }
-  .fb-2{ top:14%; right:-12%; }
-  .fb-3{ bottom:10%; left:-12%; }
-  .fb-4{ bottom:-6%; right:-6%; }
-  @media (max-width:900px){ .float-badge{ display:none; } }
-
-  /* ---------- centered section head ---------- */
-  section.block{ padding:96px 0; }
-  .section-head{ text-align:center; max-width:640px; margin:0 auto 52px; }
-  h2{ font-family:var(--font-display); font-weight:700; font-size:clamp(28px, 3.4vw, 38px); letter-spacing:-0.01em; }
-  h2 .accent{ color:var(--rust); }
-  .section-note{ margin-top:14px; font-size:16px; color:var(--ink-soft); }
-
-  /* ---------- feature grid ---------- */
-  .feature-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
-  @media (max-width:900px){ .feature-grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:560px){ .feature-grid{ grid-template-columns:1fr; } }
-  .feature-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px 22px; }
-  .f-icon{ width:44px; height:44px; border-radius:12px; background:var(--rust-soft); display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
-  .feature-card h3{ font-family:var(--font-display); font-size:16.5px; font-weight:600; margin-bottom:8px; }
-  .feature-card p{ font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
-
-  /* ---------- split (case showcase) ---------- */
-  .split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-  @media (max-width:900px){ .split{ grid-template-columns:1fr; gap:36px; } }
-  .split-art{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:10px; }
-  .split-art-screen{ border-radius:9px; overflow:hidden; aspect-ratio:16/11; }
-  .checklist{ list-style:none; margin-top:22px; display:flex; flex-direction:column; gap:13px; }
-  .checklist li{ display:flex; align-items:flex-start; gap:11px; font-size:15px; color:var(--ink-soft); }
-  .checklist svg{ flex:none; margin-top:3px; }
-  .checklist b{ color:var(--ink); }
-
-  /* ---------- proof row ---------- */
-  .proof-row{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
-  @media (max-width:900px){ .proof-row{ grid-template-columns:1fr; gap:36px; } }
-  .stat-list{ display:flex; flex-wrap:wrap; gap:36px; margin-top:28px; }
-  .stat-item .num{ font-family:var(--font-display); font-size:34px; font-weight:700; color:var(--rust); }
-  .stat-item .lbl{ font-size:13px; color:var(--ink-soft); margin-top:4px; }
-  .proof-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:32px; }
-  .proof-card .k{ font-size:12.5px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; }
-  .proof-card p{ font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:18px; }
-  .proof-card a{ font-size:14px; font-weight:600; color:var(--rust); text-decoration:none; }
-
-  /* ---------- pricing ---------- */
-  .pricing-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
-  @media (max-width:820px){ .pricing-grid{ grid-template-columns:1fr; } }
-  .price-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:28px 24px; }
-  .price-name{ font-family:var(--font-display); font-size:17px; font-weight:600; margin-bottom:6px; }
-  .price-for{ font-size:13.5px; color:var(--ink-soft); margin-bottom:20px; min-height:36px; }
-  .price-tag{ font-size:22px; font-weight:700; color:var(--rust); margin-bottom:2px; }
-  .price-time{ font-size:12.5px; color:var(--ink-soft); margin-bottom:20px; }
-  .price-list{ list-style:none; font-size:13.5px; color:var(--ink-soft); }
-  .price-list li{ padding:9px 0; border-top:1px solid var(--line); }
-  .price-list li:first-child{ border-top:none; }
-
-  /* ---------- bottom cta bar ---------- */
-  .cta-bar{
-    background:var(--rust); color:#1A0D05; border-radius:24px;
-    padding:40px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
-  }
-  .cta-bar h3{ font-family:var(--font-display); font-size:24px; font-weight:700; }
-  .cta-bar p{ font-size:14px; opacity:0.85; margin-top:6px; }
-  .cta-bar .btn{ background:#1A0D05; border-color:#1A0D05; color:var(--rust); }
-  .cta-bar .btn:hover{ opacity:0.85; }
-
-  footer{ padding:34px 0 44px; font-size:13.5px; color:var(--ink-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-  footer a{ text-decoration:none; color:inherit; }
-  footer a:hover{ color:var(--ink-soft); }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <div class="wrap nav">
-    <div class="brand">Владислав</div>
+<!-- reusable blob defs -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="blob-1" viewBox="0 0 200 200">
+      <path fill="currentColor" d="M45.4,-58.3C58.9,-49.6,70.2,-36.1,74.6,-20.7C79,-5.3,76.5,12,68.9,26.4C61.3,40.8,48.6,52.3,34.1,60.2C19.6,68.1,3.3,72.4,-12.9,70.7C-29.1,69,-45.3,61.3,-56.8,48.8C-68.3,36.3,-75.1,19,-75.4,1.5C-75.7,-16,-69.5,-33.7,-57.8,-43.6C-46.1,-53.5,-28.9,-55.6,-12.6,-58.7C3.7,-61.8,31.9,-67,45.4,-58.3Z" transform="translate(100 100)"/>
+    </symbol>
+    <symbol id="blob-2" viewBox="0 0 200 200">
+      <path fill="currentColor" d="M38.6,-49.1C50.7,-40.6,61.9,-30.2,66.4,-17.1C70.9,-4,68.7,11.8,61.3,24.8C53.9,37.8,41.3,48,27.1,55.3C12.9,62.6,-2.9,67,-18.4,64.6C-33.9,62.2,-49.1,53,-58.6,39.6C-68.1,26.2,-71.9,8.6,-69.4,-7.6C-66.9,-23.8,-58.1,-38.6,-45.6,-47.4C-33.1,-56.2,-16.6,-59,-1.4,-57.2C13.8,-55.4,26.5,-57.6,38.6,-49.1Z" transform="translate(100 100)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="brand-mark">В</span>
+      Владислав
+    </a>
     <nav class="nav-links">
-      <a href="#work">Кейсы</a>
-      <a href="#pricing">Цены</a>
-      <a href="https://t.me/NeroShoting" class="btn">Написать</a>
+      <a href="#projects">Проекты</a>
+      <a href="#stack">Технологии</a>
+      <a href="#process">Как я работаю</a>
+      <a href="#about">Обо мне</a>
     </nav>
+    <div class="nav-cta">
+      <a href="https://t.me/NeroShoting" target="_blank" rel="noreferrer" class="btn btn-primary btn-sm nav-cta-desktop">
+        Написать в Telegram
+        <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <button class="nav-burger" id="navBurger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
   </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#projects">Проекты</a>
+    <a href="#stack">Технологии</a>
+    <a href="#process">Как я работаю</a>
+    <a href="#about">Обо мне</a>
+    <a href="https://t.me/NeroShoting" target="_blank" rel="noreferrer" class="btn btn-primary mobile-menu-cta">
+      Написать в Telegram
+      <svg class="btn-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </nav>
 </header>
 
-<main>
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="ghost-word">production</div>
+  <div class="wrap">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Full-stack разработчик</span>
+      <h1>Мобильные приложения, сайты и боты, которые <span class="mark-word">доезжают</span> до релиза</h1>
+      <p class="lede">Делаю продукты полного цикла — от интерфейса до собственного бэкенда: Android/iOS, веб-сервисы, Telegram-боты и Mini Apps. Не конструктор и не шаблон — рабочая архитектура под задачу.</p>
 
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="pill"><span class="dot"></span> Full stack разработка для бизнеса</div>
-        <h1>Идея. Код. Продукт.<span class="accent">За 3–5 недель.</span></h1>
-        <p class="lede">Мобильные приложения, Telegram-боты и веб-сервисы для бизнеса. Полноценный продукт с бэкендом и админкой – не шаблон и не конструктор.</p>
-        <div class="hero-cta">
-          <a href="https://t.me/NeroShoting" class="btn">Обсудить проект →</a>
-          <div class="hero-badge">Срок разработки<b>3–5 недель</b></div>
-        </div>
-        <div class="trust-row">
-          <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Реальные кейсы</div>
-          <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Фиксированная цена</div>
-          <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Бэкенд + админка</div>
-          <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Срок – не оценка</div>
-        </div>
+      <div class="proof-row">
+        <span class="proof-chip">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          EasyFood — AI считает калории
+        </span>
+        <span class="proof-chip">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          Крымские Тропы — в RuStore
+        </span>
+        <span class="proof-chip">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+          5 Mini Apps в одной экосистеме
+        </span>
       </div>
 
-      <div class="device">
-        <div class="float-badge fb-1"><span class="sw" style="background:#E8703A;"></span> Kotlin</div>
-        <div class="float-badge fb-2"><span class="sw" style="background:#4EAF97;"></span> Flutter</div>
-        <div class="float-badge fb-3"><span class="sw" style="background:#E8B23D;"></span> Python</div>
-        <div class="float-badge fb-4"><span class="sw" style="background:#7C9CE8;"></span> Docker</div>
-        <div class="device-frame">
-          <div class="device-screen">
-            <img src="https://raw.githubusercontent.com/kitron4ik/ProjectsPortfolio/main/01_TelegramMiniApps/static/images/dashboard.png" alt="Скриншот админ-панели">
+      <div class="hero-actions">
+        <a href="https://t.me/NeroShoting" target="_blank" rel="noreferrer" class="btn btn-primary">
+          Написать в Telegram
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#projects" class="btn btn-ghost">Смотреть проекты</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="blob hero-blob"><svg viewBox="0 0 200 200"><use href="#blob-1"/></svg></div>
+      <div class="blob hero-blob-2"><svg viewBox="0 0 200 200"><use href="#blob-2"/></svg></div>
+
+      <div class="portrait-wrap">
+        <img src="assets/portrait-card.jpg" alt="Владислав">
+      </div>
+
+      <div class="float-card float-1">
+        <span class="num">2</span>
+        <span>
+          приложения
+          <span class="sub">полного цикла</span>
+        </span>
+      </div>
+      <div class="float-card float-2">
+        <span class="num">AI</span>
+        <span>
+          распознавание еды
+          <span class="sub">по фото, GPT-4 Vision</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee-band">
+    <div class="marquee">
+      <span>Kotlin · Jetpack Compose</span><span>Flutter</span><span>FastAPI</span><span>Django</span><span>Aiogram 3</span><span>Vue 3</span><span>Telegram Mini Apps</span><span>PostgreSQL · MongoDB</span><span>Docker</span><span>OpenAI GPT-4</span>
+      <span>Kotlin · Jetpack Compose</span><span>Flutter</span><span>FastAPI</span><span>Django</span><span>Aiogram 3</span><span>Vue 3</span><span>Telegram Mini Apps</span><span>PostgreSQL · MongoDB</span><span>Docker</span><span>OpenAI GPT-4</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Избранное</span>
+        <h2>Проекты, которые говорят<br>сами за себя</h2>
+      </div>
+      <p class="lede">Не макеты и не пет-проекты — рабочие продукты с бэкендом, базой данных и реальными пользователями.</p>
+    </div>
+
+    <!-- EasyFood -->
+    <article class="project-feature reveal">
+      <div class="project-visual pv-easyfood">
+        <div class="blob hero-blob"><svg viewBox="0 0 200 200"><use href="#blob-1"/></svg></div>
+        <div class="phone phone-a">
+          <img src="assets/easyfood/dashboard.jpg" alt="EasyFood — главный экран с КБЖУ">
+        </div>
+        <div class="phone phone-b">
+          <img src="assets/easyfood/smartcamera.jpg" alt="EasyFood — умная камера, распознавание блюд">
+        </div>
+      </div>
+      <div class="project-body">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Прошёл модерацию RuStore
+        </span>
+        <span class="project-tag">AI-помощник по питанию</span>
+        <h3>EasyFood</h3>
+        <ul class="mini-list">
+          <li>Распознаёт еду по фото через GPT‑4 Vision</li>
+          <li>Считает КБЖУ, строит меню и список покупок</li>
+          <li>Офлайн‑режим и realtime‑синхронизация дневника</li>
+        </ul>
+        <div class="chip-row">
+          <span class="chip">Kotlin</span>
+          <span class="chip">Jetpack Compose</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">Redis</span>
+          <span class="chip">GPT-4 Vision</span>
+          <span class="chip">Docker</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Крымские Тропы -->
+    <article class="project-feature reverse reveal">
+      <div class="project-visual">
+        <div class="crimea-photo">
+          <img src="assets/crimea/swallows-nest.jpg" alt="Ласточкино гнездо, Ялта — из приложения Крымские Тропы">
+          <span class="crimea-caption"><span class="dot2"></span>Ласточкино гнездо, Ялта</span>
+        </div>
+        <div class="itinerary-card">
+          <div class="it-head">
+            <div class="it-title">Ялта<span>маршрут · 2 дня</span></div>
+            <div class="it-num">7<span>мест</span></div>
+          </div>
+          <div class="it-row"><span class="time">09:00</span><span class="place">Ласточкино гнездо<span class="meta">1.5 ч · вход свободный</span></span></div>
+          <div class="it-row"><span class="time">13:00</span><span class="place">Массандровский дворец<span class="meta">2 ч · 500 ₽</span></span></div>
+          <div class="it-row"><span class="time">19:00</span><span class="place">Ужин в порту<span class="meta">1.5 ч · от 900 ₽</span></span></div>
+        </div>
+      </div>
+      <div class="project-body">
+        <a class="badge is-link" href="https://apps.rustore.ru/app/com.seacream.seacream" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Опубликовано в RuStore
+        </a>
+        <span class="project-tag">AI-тревел-планировщик по Крыму</span>
+        <h3>Крымские Тропы</h3>
+        <ul class="mini-list">
+          <li>Готовый маршрут по дням за 30 секунд</li>
+          <li>1000+ мест в 25+ городах Крыма</li>
+          <li>Живая навигация и realtime‑обновления на карте</li>
+        </ul>
+        <div class="chip-row">
+          <span class="chip">Flutter</span>
+          <span class="chip">Riverpod</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">Kafka</span>
+          <span class="chip">WebSocket</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- secondary grid -->
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="mini-mock">
+          <div class="mm-phone"><img src="assets/miniapps/dashboard.png" alt="Telegram Mini App — дашборд"></div>
+          <div class="mm-phone"><img src="assets/miniapps/shop.png" alt="Telegram Mini App — магазин"></div>
+          <div class="mm-phone"><img src="assets/miniapps/bot-menu.png" alt="Telegram Mini App — меню бота"></div>
+        </div>
+        <h3>Telegram Mini Apps</h3>
+        <p class="desc">Экосистема из 5 приложений в одном боте: онлайн‑запись, магазин с корзиной, квиз для лидов, AI‑чат со стримингом и админ‑дашборд с графиками.</p>
+        <div class="chip-row">
+          <span class="chip">Aiogram 3</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">Docker</span>
+        </div>
+        <a class="card-link" href="https://github.com/kitron4ik/ProjectsPortfolio" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+          Код на GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="abstract-mock">
+          <div class="stack">
+            <div class="bar b1"></div>
+            <div class="bar b2"></div>
+          </div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal); flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+        </div>
+        <h3>Umbrella</h3>
+        <p class="desc">Медицинская платформа: онлайн‑запись к врачу, электронная карта пациента, расписание клиники и уведомления. Vue 3 на фронте, Django REST на бэке.</p>
+        <div class="chip-row">
+          <span class="chip">Vue 3</span>
+          <span class="chip">Pinia</span>
+          <span class="chip">Django REST</span>
+          <span class="chip">MySQL</span>
+        </div>
+        <a class="card-link" href="https://github.com/kitron4ik/Umbrella/tree/MVP" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+          Код на GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="abstract-mock">
+          <div class="stack">
+            <div class="bar b1" style="width:55%"></div>
+            <div class="bar b2" style="width:30%"></div>
+          </div>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange); flex-shrink:0"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>AI-боты</h3>
+        <p class="desc">GPT‑ассистент с памятью диалога и концепт AI‑продавца для автоматизации первой линии продаж на Avito.</p>
+        <div class="chip-row">
+          <span class="chip">Python</span>
+          <span class="chip">OpenAI API</span>
+          <span class="chip">Aiogram 3</span>
+        </div>
+        <a class="card-link" href="https://github.com/kitron4ik/ProjectsPortfolio" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+          Код на GitHub
+        </a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="mini-mock">
+          <div class="mm-phone"><img src="assets/oris/game.png" alt="Словолов — игровой экран"></div>
+          <div class="mm-phone"><img src="assets/oris/leaderboard.png" alt="Словолов — рейтинг игроков"></div>
+          <div class="mm-phone"><img src="assets/oris/themes.png" alt="Словолов — выбор тем"></div>
+        </div>
+        <h3>Словолов</h3>
+        <p class="desc">Ежедневная word-игра для MAX и VK с рейтингом, сериями побед и шерингом результата. Одобрена и опубликована в каталоге VK Игр.</p>
+        <div class="chip-row">
+          <span class="chip">Go</span>
+          <span class="chip">MAX Bridge</span>
+          <span class="chip">VK Mini Apps</span>
+          <span class="chip">systemd · Caddy</span>
+        </div>
+        <a class="card-link" href="https://vk.ru/app54715773" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          В каталоге VK Игр
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="stack-section" id="stack">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Технологии</span>
+        <h2>Полный цикл — от кнопки<br>в приложении до сервера</h2>
+      </div>
+      <p class="lede">Свой стек под каждую платформу — без No-code и на проверенных в проде инструментах.</p>
+    </div>
+
+    <div class="stack-grid">
+      <div class="stack-group reveal">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h4>Мобильная разработка</h4>
+        <div class="tag-row"><span>Kotlin</span><span>Jetpack Compose</span><span>Flutter</span><span>Riverpod</span><span>Hilt</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg></div>
+        <h4>Backend &amp; данные</h4>
+        <div class="tag-row"><span>Python</span><span>Go</span><span>FastAPI</span><span>Django</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>Kafka</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg></div>
+        <h4>Веб &amp; фронтенд</h4>
+        <div class="tag-row"><span>Vue 3</span><span>JavaScript</span><span>HTML5/CSS3</span><span>Адаптивная вёрстка</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4>Боты &amp; AI</h4>
+        <div class="tag-row"><span>Aiogram 3</span><span>Telegram Mini Apps</span><span>MAX Bridge</span><span>VK Mini Apps</span><span>OpenAI GPT‑4</span><span>LangChain</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h4>Инфраструктура</h4>
+        <div class="tag-row"><span>Docker</span><span>Nginx</span><span>GitHub Actions</span><span>Let's Encrypt</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h4>Продукт и процесс</h4>
+        <div class="tag-row"><span>AI-ускоренная разработка</span><span>MVP за 3–5 недель</span><span>Публикация в сторах</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Как я работаю</span>
+        <h2>От брифа до релиза —<br>без чёрного ящика</h2>
+      </div>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-list">
+        <div class="p-step reveal">
+          <div class="p-num-wrap"><div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="p-num">01</div></div>
+          <div>
+            <h3>Бриф и цели</h3>
+            <p>Обсуждаем задачу, аудиторию и ограничения по срокам и бюджету — чтобы архитектура сразу закладывалась под нужный масштаб.</p>
           </div>
         </div>
-        <div class="device-base"></div>
+        <div class="p-step reveal">
+          <div class="p-num-wrap"><div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div><div class="p-num">02</div></div>
+          <div>
+            <h3>Прототип и архитектура</h3>
+            <p>Собираю кликабельный прототип и техническую схему: база данных, API, интеграции — до того, как написана первая строка боевого кода.</p>
+          </div>
+        </div>
+        <div class="p-step reveal">
+          <div class="p-num-wrap"><div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="p-num">03</div></div>
+          <div>
+            <h3>Разработка спринтами</h3>
+            <p>Показываю прогресс каждую неделю на рабочей сборке — вы видите продукт по мере роста, а не через месяц молчания.</p>
+          </div>
+        </div>
+        <div class="p-step reveal">
+          <div class="p-num-wrap"><div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div><div class="p-num">04</div></div>
+          <div>
+            <h3>Запуск и поддержка</h3>
+            <p>Публикация в RuStore / App Store, деплой на сервер с SSL и мониторингом, сопровождение и доработки после релиза.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-panel reveal">
+        <div class="blob process-panel-blob"><svg viewBox="0 0 200 200"><use href="#blob-1"/></svg></div>
+        <div class="process-panel-inner">
+          <span class="p-eyebrow">Скорость без потери качества</span>
+          <h3>MVP — за 3–5 недель</h3>
+          <p>За счёт AI-ускоренной разработки прихожу к рабочему продукту в разы быстрее классической студийной разработки — с полноценным бэкендом, а не прототипом на конструкторе.</p>
+          <div class="process-stat-row">
+            <div class="process-stat">
+              <div class="n">1 нед.</div>
+              <div class="l">цикл показа прогресса</div>
+            </div>
+            <div class="process-stat">
+              <div class="n">100%</div>
+              <div class="l">свой код, без вендор-лока</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="block" id="work">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Всё что нужно для<span class="accent"> быстрого MVP</span></h2>
-        <p class="section-note">Не набор фичей, а то, что реально закрывает задачу бизнеса.</p>
-      </div>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="3" fill="none" stroke="#E8703A" stroke-width="1.6"/><path d="M7 10h6M10 7v6" stroke="#E8703A" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-          <h3>Реальный бэкенд</h3>
-          <p>Не витрина, а рабочая система с базой данных и админкой.</p>
-        </div>
-        <div class="feature-card">
-          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="#E8703A" stroke-width="1.6"/><path d="M10 6v4l3 2" stroke="#E8703A" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-          <h3>Фиксированный срок</h3>
-          <p>3–5 недель на реализацию, а не «обсудим по ходу».</p>
-        </div>
-        <div class="feature-card">
-          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 16V8l6-4 6 4v8" fill="none" stroke="#E8703A" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 16v-5h4v5" fill="none" stroke="#E8703A" stroke-width="1.6"/></svg></div>
-          <h3>Готовый стек</h3>
-          <p>Kotlin, Flutter, Python, Vue – то, что уже работает в проде.</p>
-        </div>
-        <div class="feature-card">
-          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3v14M6 6h5.5a2.5 2.5 0 0 1 0 5H8a2.5 2.5 0 0 0 0 5h6" fill="none" stroke="#E8703A" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-          <h3>Фикс-цена</h3>
-          <p>Вилка озвучена сразу, без почасовой ставки и сюрпризов.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" style="border-top:1px solid var(--line);">
-    <div class="wrap split">
-      <div class="split-art">
-        <div class="split-art-screen">
-          <svg viewBox="0 0 300 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
-            <rect width="300" height="206" fill="#14171F"/>
-            <polygon points="0,165 45,100 90,132 140,68 190,120 300,44 300,206 0,206" fill="#4EAF97" opacity="0.3"/>
-            <path d="M15 178 Q 80 100 140 135 T 280 52" fill="none" stroke="#E8B23D" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
-            <circle cx="15" cy="178" r="6" fill="#E8703A"/>
-            <circle cx="280" cy="52" r="5" fill="#14171F" stroke="#4EAF97" stroke-width="3"/>
-          </svg>
-        </div>
-      </div>
-      <div>
-        <div class="pill"><span class="dot"></span> Внутри портфолио</div>
-        <h2>Крымские Тропы<span class="accent" style="display:block;">по всему Крыму</span></h2>
-        <ul class="checklist">
-          <li><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5.5 9l2.2 2.2L13 6.5" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> <span><b>500+</b> мест и <b>20+</b> городов Крыма в базе</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5.5 9l2.2 2.2L13 6.5" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Маршрут собирается сам по городу и датам</li>
-          <li><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5.5 9l2.2 2.2L13 6.5" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Живая навигация и гибкие фильтры</li>
-          <li><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="8" fill="none" stroke="#E8703A" stroke-width="1.5"/><path d="M5.5 9l2.2 2.2L13 6.5" fill="none" stroke="#E8703A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Опубликовано на RuStore</span></li>
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid reveal">
+      <div class="blob about-blob"><svg viewBox="0 0 200 200"><use href="#blob-2"/></svg></div>
+      <div class="about-copy">
+        <span class="eyebrow">Обо мне</span>
+        <h2>Делаю продукт целиком,<br>а не отдельный экран</h2>
+        <p class="lede2">Я — full-stack разработчик. Собираю интерфейс на Kotlin, Flutter или Vue и связываю его с собственным backend на FastAPI или Django: база данных, авторизация, интеграции с AI и внешними сервисами. Каждый проект получает архитектуру под задачу — никаких конструкторов и коробочных решений.</p>
+        <ul class="check-list">
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Полный цикл: mobile + backend + web</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Свой бэкенд, а не No-code конструктор</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>AI-ускоренная разработка — MVP за 3–5 недель</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Сопровождение и доработки после запуска</li>
         </ul>
-        <a href="https://gitlab.com/kitron4ik/krimaigid" target="_blank" rel="noopener" class="btn" style="margin-top:26px;">Смотреть репозиторий →</a>
       </div>
-    </div>
-  </section>
-
-  <section class="block" style="border-top:1px solid var(--line);">
-    <div class="wrap proof-row">
-      <div>
-        <h2>Что уже сделано</h2>
-        <p class="section-note">Не тестовые задания – рабочий код, который можно открыть и проверить.</p>
-        <div class="stat-list">
-          <div class="stat-item"><div class="num">3</div><div class="lbl">реализованных кейса</div></div>
-          <div class="stat-item"><div class="num">500K+</div><div class="lbl">продуктов в базе EasyFood</div></div>
-          <div class="stat-item"><div class="num">401</div><div class="lbl">коммит в EasyFood</div></div>
+      <div class="about-visual">
+        <div class="about-card">
+          <div class="n">2</div>
+          <div class="l">завершённых мобильных приложения</div>
         </div>
-      </div>
-      <div class="proof-card">
-        <div class="k">Код открыт</div>
-        <p>Каждый кейс – это рабочий репозиторий с историей коммитов, а не рендер в Figma. Экосистема мини-приложений и Крымские Тропы доступны для просмотра прямо на GitHub и GitLab.</p>
-        <a href="https://github.com/kitron4ik" target="_blank" rel="noopener">github.com/kitron4ik →</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="pricing" style="border-top:1px solid var(--line);">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Пакеты <span class="accent">MVP</span></h2>
-        <p class="section-note">Фиксированная вилка, не почасовая ставка.</p>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="price-card">
-          <div class="price-name">Запись и клиентская база</div>
-          <div class="price-for">Барбершопы, клиники, автосервисы, репетиторы</div>
-          <div class="price-tag">180 000–260 000 ₽</div>
-          <div class="price-time">3–4 недели</div>
-          <ul class="price-list">
-            <li>Онлайн-запись + админка</li>
-            <li>Push-напоминания</li>
-            <li>Предоплата (ЮKassa / Т-Касса)</li>
-          </ul>
+        <div class="about-card orange">
+          <div class="n">10+</div>
+          <div class="l">завершённых продуктовых проектов</div>
         </div>
-        <div class="price-card">
-          <div class="price-name">Каталог и заказы</div>
-          <div class="price-for">Малый retail, доставка еды, интернет-магазин</div>
-          <div class="price-tag">220 000–320 000 ₽</div>
-          <div class="price-time">4–5 недель</div>
-          <ul class="price-list">
-            <li>Каталог, корзина, заказ</li>
-            <li>Трекинг статуса заказа</li>
-            <li>Админка для заказов</li>
-          </ul>
-        </div>
-        <div class="price-card">
-          <div class="price-name">Лояльность</div>
-          <div class="price-for">Сети кафе, ритейл, бьюти-салоны</div>
-          <div class="price-tag">200 000–300 000 ₽</div>
-          <div class="price-time">3–4 недели</div>
-          <ul class="price-list">
-            <li>QR-карта лояльности</li>
-            <li>Баллы и кэшбэк</li>
-            <li>+ интеграция с кассой</li>
-          </ul>
+        <div class="about-card">
+          <div class="n">Mobile · Web · Bots · Mini Apps</div>
+          <div class="l">четыре платформы — одна команда: я</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="block" style="padding-top:0;">
-    <div class="wrap">
-      <div class="cta-bar">
-        <div>
-          <h3>Готовы обсудить задачу?</h3>
-          <p>Отвечу с планом и сроком, без брифов на десять страниц.</p>
+<!-- ============ CTA / CONTACT ============ -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <div class="blob cta-blob-1"><svg viewBox="0 0 200 200"><use href="#blob-1"/></svg></div>
+      <div class="blob cta-blob-2"><svg viewBox="0 0 200 200"><use href="#blob-2"/></svg></div>
+      <div class="cta-inner">
+        <span class="eyebrow" style="color:var(--peach)">Обсудим проект</span>
+        <h2>Готовы начать <span style="color:var(--peach); font-style:italic">свой</span> проект?</h2>
+        <p class="lede">Расскажите, что нужно — мобильное приложение, сайт, бот или Mini App. Отвечаю в Telegram в течение дня.</p>
+        <div class="cta-actions">
+          <a href="https://t.me/NeroShoting" target="_blank" rel="noreferrer" class="btn btn-primary">
+            Написать в Telegram
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="mailto:craftukww@gmail.com" class="cta-email">craftukww@gmail.com</a>
         </div>
-        <a href="https://t.me/NeroShoting" class="btn">Telegram – @NeroShoting →</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-</main>
-
-<footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:8px;">
-    <span>© 2026 Владислав</span>
-    <span><a href="https://github.com/kitron4ik" target="_blank" rel="noopener">github.com/kitron4ik</a></span>
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="#top" class="footer-brand">
+      <span class="brand-mark" style="width:32px;height:32px;font-size:16px;">В</span>
+      Владислав — Full-Stack Developer
+    </a>
+    <nav class="footer-links">
+      <a href="#projects">Проекты</a>
+      <a href="#stack">Технологии</a>
+      <a href="#process">Процесс</a>
+      <a href="https://t.me/NeroShoting" target="_blank" rel="noreferrer">Telegram</a>
+    </nav>
+    <span class="footer-copy">© 2026 · Все проекты — собственная разработка</span>
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
